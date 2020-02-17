@@ -30,7 +30,7 @@ def main():
     remove = args.remove_fake_protein_change
     X_maf = args.X_chromosome_maf
 
-    maf0 = pd.read_csv(input_maf, sep="\t", index_col=None,low_memory=False)
+    maf0 = pd.read_csv(input_maf, sep="\t", index_col=None,low_memory=False,comment='#')
     maf0.head(2)
 
     maf0 = maf0.drop_duplicates()
@@ -38,7 +38,7 @@ def main():
 
     k = maf0.index[maf0['Chromosome'] == 'X'].tolist()
     if (len(X_maf)>0)&(len(k)<1):
-        mafX = pd.read_csv(X_maf, sep="\t", index_col=None, low_memory=False)
+        mafX = pd.read_csv(X_maf, sep="\t", index_col=None, low_memory=False,comment='#')
         mafX.head(2)
         k=mafX.index[mafX['Chromosome'] == 'X'].tolist()
         mafX=mafX.loc[k]
