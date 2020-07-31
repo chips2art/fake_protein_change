@@ -30,7 +30,9 @@ def main():
     remove = args.remove_fake_protein_change
     X_maf = args.X_chromosome_maf
 
-    maf0 = pd.read_csv(input_maf, sep="\t", index_col=None,low_memory=False,comment='#')
+    with open(input_maf, 'rb') as f:
+        result = chardet.detect(f.read())  # or readline if the file is large
+    maf0 = pd.read_csv(input_maf,encoding=result['encoding'], sep="\t", index_col=None,low_memory=False,comment='#')
     maf0.head(2)
 
     maf0 = maf0.drop_duplicates()
